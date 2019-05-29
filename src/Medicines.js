@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Header } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class About extends React.Component {
@@ -11,12 +12,20 @@ class About extends React.Component {
   }
 
   componentWillMount() {
-    axios.get("http://localhost:5000/api/list").then(res => {
-      console.log(res, "response");
-      this.setState({ medicines: res.data });
-    });
+    if (this.props.isAuthenticated === false) {
+      return;
+    } else {
+      axios.get("http://localhost:5000/api/list").then(res => {
+        console.log(res, "response");
+        this.setState({ medicines: res.data });
+      });
+    }
   }
   render() {
+    if (this.props.isAuthenticated === false) {
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div>
         <Container>

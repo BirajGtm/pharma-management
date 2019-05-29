@@ -1,7 +1,7 @@
 function checkCookie() {
   var username = getCookie("username");
   if (username != "") {
-    return "LOGGED_IN";
+    return username;
   } else {
     return "NEED_TO_LOGIN";
   }
@@ -12,6 +12,7 @@ function setCookie(cvalue) {
   d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
   document.cookie = "username" + "=" + cvalue + ";" + expires + ";path=/";
+  return true;
 }
 
 function getCookie() {
@@ -30,4 +31,8 @@ function getCookie() {
   return "";
 }
 
-export default { setCookie, getCookie, checkCookie };
+function deleteCookie() {
+  setCookie("");
+}
+
+export default { setCookie, getCookie, checkCookie, deleteCookie };

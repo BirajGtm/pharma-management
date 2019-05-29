@@ -1,13 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import auth from "./config/auth";
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeItem: "home" };
+    this.state = { activeItem: "home", loggedIn: true };
+
+    this.deleteUser = this.deleteUser.bind(this);
+  }
+
+  deleteUser() {
+    auth.deleteCookie();
+    this.setState({ loggedIn: false });
   }
 
   render() {
+    if (this.state.loggedIn === false) {
+      window.location.reload();
+    }
+
     return (
       <div className="ui pointing menu">
         <Link to="/">
@@ -40,16 +52,17 @@ class Nav extends React.Component {
             Sales
           </span>
         </Link>
-        <Link to="/login">
-          <span
-            onClick={() => this.setState({ activeItem: "login" })}
-            className={
-              this.state.activeItem === "login" ? "active item" : "item"
-            }
-          >
-            Login
-          </span>
-        </Link>
+        {this.props.isAuthenticated === true ? (
+          <a href="#" onClick={this.deleteUser}>
+            <span onClick={this.deleteUser} className="item">
+              Logout
+            </span>
+          </a>
+        ) : (
+          <Link to="/login">
+            <span className="active item">Login</span>
+          </Link>
+        )}
 
         <div className="right menu">
           <div className="item">

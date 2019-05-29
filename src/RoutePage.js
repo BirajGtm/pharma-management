@@ -4,32 +4,42 @@ import Home from "./Home";
 import Medicines from "./Medicines";
 import Sales from "./Sales";
 import SignUp from "./SignUp";
+import Login from "./Login";
 import Nav from "./Nav";
 import auth from "./config/auth";
 
 class RoutePage extends React.Component {
   constructor(props) {
     super(props);
-    this.userData = "";
-  }
-
-  componentDidMount() {
-    this.userData = auth.getCookie();
   }
 
   render() {
+    const userData = auth.checkCookie() === "NEED_TO_LOGIN" ? false : true;
     return (
       <BrowserRouter>
-        <Nav />
+        <Nav isAuthenticated={userData} />
         <div>
-          <Route user={this.userData} path="/" exact component={Home} />
           <Route
-            user={this.userData}
-            path="/medicines/"
-            component={Medicines}
+            path="/"
+            exact
+            component={() => <Home isAuthenticated={userData} />}
           />
-          <Route user={this.userData} path="/sales/" component={Sales} />
-          <Route path="/signup/" component={SignUp} />
+          <Route
+            path="/medicines/"
+            component={() => <Medicines isAuthenticated={userData} />}
+          />
+          <Route
+            path="/sales/"
+            component={() => <Sales isAuthenticated={userData} />}
+          />
+          <Route
+            path="/signup/"
+            component={() => <SignUp isAuthenticated={userData} />}
+          />
+          <Route
+            path="/login/"
+            component={() => <Login isAuthenticated={userData} />}
+          />
         </div>
       </BrowserRouter>
     );

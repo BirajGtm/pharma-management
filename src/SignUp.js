@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -51,7 +44,7 @@ class SignUp extends React.Component {
       return;
     }
 
-    let data = await axios.post("http://localhost:5000/api/signup", {
+    await axios.post("http://localhost:5000/api/signup", {
       mode: "no-cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -62,18 +55,14 @@ class SignUp extends React.Component {
       email: this.state.email,
       password: this.state.password
     });
-    console.log(data, "axios post signup req");
   }
 
   render() {
+    if (this.props.isAuthenticated === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="login-form">
-        {/*
-        Heads up! The styles below are necessary for the correct render of this example.
-        You can do same with CSS, the main idea is that all the elements up to the `Grid`
-        below must have a height of 100%.
-      */}
-
         <Grid
           textAlign="center"
           style={{ height: "100%" }}

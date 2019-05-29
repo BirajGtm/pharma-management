@@ -7,14 +7,20 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import auth from "./config/auth";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", error: false, errorMessage: "" };
+    this.state = {
+      username: "",
+      password: "",
+      error: false,
+      errorMessage: "",
+      loggedIn: false
+    };
 
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -33,10 +39,10 @@ class Login extends React.Component {
     });
 
     if (data.data !== "USERNAME OR PASSWORD IS INVALID") {
-      //   sessionStorage.setItem("userEmail", data.data);
       auth.setCookie(data.data);
       this.setState({
-        error: false
+        error: false,
+        loggedIn: true
       });
     } else {
       this.setState({
@@ -46,6 +52,12 @@ class Login extends React.Component {
     }
   }
   render() {
+    if (this.state.loggedIn === true) {
+      window.location.reload();
+    }
+    if (this.props.isAuthenticated === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="login-form">
         {/*
@@ -60,9 +72,13 @@ class Login extends React.Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" color="teal" textAlign="center">
-              Log-in to your account
+            <Header as="h4" color="teal" textAlign="center">
+              To use this app..
             </Header>
+            <Header as="h2" color="teal" textAlign="center">
+              Log-in to your account.
+            </Header>
+
             <Form size="large">
               <Segment stacked>
                 <Form.Input

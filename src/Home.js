@@ -1,27 +1,18 @@
 import React from "react";
 import { Grid, Header } from "semantic-ui-react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import auth from "./config/auth";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      redirectToLogin: false
-    };
-  }
-
-  componentWillMount() {
-    // if (user.length === 0) {
-    //   this.setState({ redirectToLogin: true });
-    // }
   }
 
   render() {
-    // if ((this.props.user.length = 0)) {
-    //   return <Redirect to="/login" />;
-    // }
-    console.log(this.props, "user from home");
+    if (this.props.isAuthenticated === false) {
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div className="login-form">
         {/*
@@ -37,7 +28,7 @@ class Home extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              hello user
+              Hello {auth.getCookie()}
             </Header>
           </Grid.Column>
         </Grid>
