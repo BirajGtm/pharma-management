@@ -1,7 +1,9 @@
 import React from "react";
-import { Container, Header } from "semantic-ui-react";
+import { Container, Button, Modal, Divider, Message } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import Delete from "./medicines/Delete";
+import Update from "./medicines/Update";
 
 class About extends React.Component {
   constructor(props) {
@@ -16,7 +18,6 @@ class About extends React.Component {
       return;
     } else {
       axios.get("http://localhost:5000/api/list").then(res => {
-        console.log(res, "response");
         this.setState({ medicines: res.data });
       });
     }
@@ -24,6 +25,10 @@ class About extends React.Component {
   render() {
     if (this.props.isAuthenticated === false) {
       return <Redirect to="/login" />;
+    }
+
+    if (this.state.reload) {
+      window.location.reload();
     }
 
     return (
@@ -37,6 +42,7 @@ class About extends React.Component {
                 <th className="">NOS</th>
                 <th className="">Mfg Date</th>
                 <th className="">Exp Date</th>
+                <th className="">Action</th>
               </tr>
             </thead>
             <tbody className="">
@@ -47,6 +53,30 @@ class About extends React.Component {
                   <td className="">{item.total}</td>
                   <td className="">{item.mfd.substring(0, 10)}</td>
                   <td className="">{item.exd.substring(0, 10)}</td>
+                  <td className="">
+                    {/* Modal for deletion */}
+                    <Modal
+                      trigger={
+                        <Button inverted color="red" type="submit">
+                          Delete
+                        </Button>
+                      }
+                    >
+                      <Modal.Header color="red">Confirm Delete?</Modal.Header>
+                      <Delete item={item} />
+                    </Modal>
+                    {/* modal for update */}
+                    <Modal
+                      trigger={
+                        <Button inverted color="green" type="submit">
+                          Update
+                        </Button>
+                      }
+                    >
+                      <Modal.Header color="green">Confirm Update?</Modal.Header>
+                      <Update item={item} />
+                    </Modal>
+                  </td>
                 </tr>
               ))}
             </tbody>

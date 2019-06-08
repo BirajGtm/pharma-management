@@ -7,6 +7,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import Nav from "./Nav";
 import auth from "./config/auth";
+import AddMed from "./AddMed";
 
 class RoutePage extends React.Component {
   constructor(props) {
@@ -27,6 +28,10 @@ class RoutePage extends React.Component {
           <Route
             path="/medicines/"
             component={() => <Medicines isAuthenticated={userData} />}
+          />
+          <Route
+            path="/addmedicine/"
+            component={() => <AddMed isAuthenticated={userData} />}
           />
           <Route
             path="/sales/"
