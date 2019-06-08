@@ -4,10 +4,6 @@ import { Redirect } from "react-router-dom";
 import auth from "./config/auth";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (this.props.isAuthenticated === false) {
       return <Redirect to="/login" />;

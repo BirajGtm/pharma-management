@@ -105,7 +105,6 @@ class SignUp extends React.Component {
                   icon="lock"
                   iconPosition="left"
                   placeholder="Password"
-                  type="password"
                   value={this.state.password}
                   onChange={event =>
                     this.setState({ password: event.target.value })
@@ -118,7 +117,6 @@ class SignUp extends React.Component {
                   icon="lock"
                   iconPosition="left"
                   placeholder="Re-enter Your Password"
-                  type="password"
                   value={this.state.password2}
                   onChange={event =>
                     this.setState({ password2: event.target.value })

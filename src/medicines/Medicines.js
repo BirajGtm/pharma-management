@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Button, Modal, Divider, Message } from "semantic-ui-react";
+import { Container, Button, Modal } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import Delete from "./medicines/Delete";
-import Update from "./medicines/Update";
+import Delete from "./Delete";
+import Update from "./Update";
+import MedNav from "./MedNav";
 
 class About extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class About extends React.Component {
     return (
       <div>
         <Container>
+          <MedNav />
           <table className="ui blue celled selectable table">
             <thead className="">
               <tr className="">

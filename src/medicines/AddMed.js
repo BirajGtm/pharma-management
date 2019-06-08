@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Form, Button, Header, Message } from "semantic-ui-react";
 import axios from "axios";
+import MedNav from "./MedNav";
 
 class AddMed extends React.Component {
   constructor(props) {
@@ -97,6 +98,7 @@ class AddMed extends React.Component {
   render() {
     return (
       <Container>
+        <MedNav />
         <Header color="teal" as="h2">
           Add Medicine
         </Header>

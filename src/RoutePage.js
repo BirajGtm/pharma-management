@@ -1,19 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./Home";
-import Medicines from "./Medicines";
-import Sales from "./Sales";
+import Medicines from "./medicines/Medicines";
+import Sales from "./sales/Sales";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import Nav from "./Nav";
 import auth from "./config/auth";
-import AddMed from "./AddMed";
+import AddMed from "./medicines/AddMed";
 
 class RoutePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const userData = auth.checkCookie() === "NEED_TO_LOGIN" ? false : true;
     return (
