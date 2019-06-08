@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Form, Button, Header, Message } from "semantic-ui-react";
 import axios from "axios";
 import MedNav from "./MedNav";
+import { Redirect } from "react-router-dom";
 
 class AddMed extends React.Component {
   constructor(props) {
@@ -96,6 +97,9 @@ class AddMed extends React.Component {
   }
 
   render() {
+    if (this.props.isAuthenticated === false) {
+      return <Redirect to="/login" />;
+    }
     return (
       <Container>
         <MedNav />

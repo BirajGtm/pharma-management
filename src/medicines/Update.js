@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, Divider, Message, Form } from "semantic-ui-react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Update extends React.Component {
   constructor(props) {
@@ -44,6 +45,9 @@ class Update extends React.Component {
   }
 
   render() {
+    if (this.props.isAuthenticated === false) {
+      return <Redirect to="/login" />;
+    }
     if (this.state.reload) {
       window.location.reload();
     }

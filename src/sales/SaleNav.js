@@ -5,10 +5,10 @@ class MedNav extends React.Component {
   render() {
     return (
       <div className="ui fluid three item menu">
-        <Link className="item" to="/medicines">
+        <Link className="item" to="/sales">
           Sale
         </Link>
-        <Link className="item" to="/addmedicine">
+        <Link className="item" to="/stockssold">
           Stocks Sold
         </Link>
       </div>

@@ -8,6 +8,7 @@ import Login from "./Login";
 import Nav from "./Nav";
 import auth from "./config/auth";
 import AddMed from "./medicines/AddMed";
+import StocksSold from "./sales/StocksSold";
 
 class RoutePage extends React.Component {
   render() {
@@ -32,6 +33,10 @@ class RoutePage extends React.Component {
           <Route
             path="/sales/"
             component={() => <Sales isAuthenticated={userData} />}
+          />
+          <Route
+            path="/stockssold/"
+            component={() => <StocksSold isAuthenticated={userData} />}
           />
           <Route
             path="/signup/"
