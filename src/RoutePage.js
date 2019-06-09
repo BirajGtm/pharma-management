@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Medicines from "./medicines/Medicines";
 import Sales from "./sales/Sales";
@@ -11,40 +11,45 @@ import AddMed from "./medicines/AddMed";
 import StocksSold from "./sales/StocksSold";
 
 class RoutePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: auth.checkCookie() === "NEED_TO_LOGIN" ? false : true
+    };
+  }
   render() {
-    const userData = auth.checkCookie() === "NEED_TO_LOGIN" ? false : true;
+    const PrivateRoute = ({ component: Component, ...rest }) => {
+      return (
+        // Show the component only when the user is logged in
+        // Otherwise, redirect the user to /login page
+        <Route
+          {...rest}
+          render={props =>
+            this.state.userData ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+      );
+    };
     return (
       <BrowserRouter>
-        <Nav isAuthenticated={userData} />
+        <Nav isAuthenticated={this.state.userData} />
         <div>
+          <PrivateRoute component={Home} path="/" exact />
+          <PrivateRoute component={Medicines} path="/medicines/" />
+          <PrivateRoute component={AddMed} path="/addmedicine/" />
+          <PrivateRoute component={Sales} path="/sales" />
+          <PrivateRoute component={StocksSold} path="/stockssold" />
           <Route
-            path="/"
-            exact
-            component={() => <Home isAuthenticated={userData} />}
-          />
-          <Route
-            path="/medicines/"
-            component={() => <Medicines isAuthenticated={userData} />}
-          />
-          <Route
-            path="/addmedicine/"
-            component={() => <AddMed isAuthenticated={userData} />}
-          />
-          <Route
-            path="/sales/"
-            component={() => <Sales isAuthenticated={userData} />}
-          />
-          <Route
-            path="/stockssold/"
-            component={() => <StocksSold isAuthenticated={userData} />}
-          />
-          <Route
+            component={() => <SignUp isAuthenticated={this.state.userData} />}
             path="/signup/"
-            component={() => <SignUp isAuthenticated={userData} />}
           />
           <Route
             path="/login/"
-            component={() => <Login isAuthenticated={userData} />}
+            component={() => <Login isAuthenticated={this.state.userData} />}
           />
         </div>
       </BrowserRouter>

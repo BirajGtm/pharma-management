@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
 import SaleNav from "./SaleNav";
 import axios from "axios";
 
@@ -20,10 +19,6 @@ class StocksSold extends React.Component {
     }
   }
   render() {
-    if (this.props.isAuthenticated === false) {
-      return <Redirect to="/login" />;
-    }
-
     return (
       <div>
         <Container>

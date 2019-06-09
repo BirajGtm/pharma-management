@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Header } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import auth from "./config/auth";
 
 class Home extends React.Component {
@@ -11,12 +11,6 @@ class Home extends React.Component {
 
     return (
       <div className="login-form">
-        {/*
-        Heads up! The styles below are necessary for the correct render of this example.
-        You can do same with CSS, the main idea is that all the elements up to the `Grid`
-        below must have a height of 100%.
-      */}
-
         <Grid
           textAlign="center"
           style={{ height: "100%" }}
@@ -26,8 +20,27 @@ class Home extends React.Component {
             <Header as="h2" color="teal" textAlign="center">
               Hello {auth.getCookie()}
             </Header>
+            <Header as="h4">
+              Use following links to access the pages directly:
+            </Header>
           </Grid.Column>
         </Grid>
+        <div className="ui fluid two item menu">
+          <Link className="item" to="/medicines">
+            List Medicine
+          </Link>
+          <Link className="item" to="/addmedicine">
+            Add Medicine
+          </Link>
+        </div>
+        <div className="ui fluid two item menu">
+          <Link className="item" to="/sales">
+            Sale
+          </Link>
+          <Link className="item" to="/stockssold">
+            Stocks Sold
+          </Link>
+        </div>
       </div>
     );
   }

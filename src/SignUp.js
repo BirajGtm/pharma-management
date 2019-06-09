@@ -58,6 +58,7 @@ class SignUp extends React.Component {
   }
 
   render() {
+    console.log(this.props, "signup props");
     if (this.props.isAuthenticated === true) {
       return <Redirect to="/" />;
     }

@@ -55,17 +55,11 @@ class Login extends React.Component {
     if (this.state.loggedIn === true) {
       window.location.reload();
     }
-    if (this.props.isAuthenticated === true) {
+    if (this.props.isAuthenticated) {
       return <Redirect to="/" />;
     }
     return (
       <div className="login-form">
-        {/*
-        Heads up! The styles below are necessary for the correct render of this example.
-        You can do same with CSS, the main idea is that all the elements up to the `Grid`
-        below must have a height of 100%.
-      */}
-
         <Grid
           textAlign="center"
           style={{ height: "100%" }}

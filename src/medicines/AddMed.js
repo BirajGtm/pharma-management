@@ -2,14 +2,13 @@ import React from "react";
 import { Container, Form, Button, Header, Message } from "semantic-ui-react";
 import axios from "axios";
 import MedNav from "./MedNav";
-import { Redirect } from "react-router-dom";
 
 class AddMed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mfgDate: "",
-      expDate: "",
+      mfgDate: new Date().toISOString().substring(0, 10),
+      expDate: new Date().toISOString().substring(0, 10),
       cost: 0,
       total: 0,
       name: "",
@@ -81,8 +80,8 @@ class AddMed extends React.Component {
         errMsg: `${data.data.medicine} was added successfully!`,
         cost: 0,
         total: 0,
-        mfgDate: "",
-        expDate: "",
+        mfgDate: new Date().toISOString().substring(0, 10),
+        expDate: new Date().toISOString().substring(0, 10),
         name: ""
       });
     }
@@ -93,13 +92,9 @@ class AddMed extends React.Component {
         errMsg: data.data.message
       });
     }
-    console.log(data, "response from api");
   }
 
   render() {
-    if (this.props.isAuthenticated === false) {
-      return <Redirect to="/login" />;
-    }
     return (
       <Container>
         <MedNav />

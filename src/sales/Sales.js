@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Button } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
 import SaleNav from "./SaleNav";
 import axios from "axios";
 
@@ -15,16 +14,14 @@ class Sales extends React.Component {
   }
 
   getMedicine() {
-    if (this.props.isAuthenticated === true) {
-      axios.get("http://localhost:5000/api/list").then(res => {
-        let medicines = res.data.map(item => {
-          item.isChecked = false;
-          item.sold = 0;
-          return item;
-        });
-        this.setState({ medicines });
+    axios.get("http://localhost:5000/api/list").then(res => {
+      let medicines = res.data.map(item => {
+        item.isChecked = false;
+        item.sold = 0;
+        return item;
       });
-    }
+      this.setState({ medicines });
+    });
   }
 
   componentDidMount() {
@@ -85,9 +82,6 @@ class Sales extends React.Component {
   }
 
   render() {
-    if (this.props.isAuthenticated === false) {
-      return <Redirect to="/login" />;
-    }
     return (
       <div>
         <Container>

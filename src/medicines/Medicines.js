@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Button, Modal } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Delete from "./Delete";
 import Update from "./Update";
@@ -14,20 +13,12 @@ class About extends React.Component {
     };
   }
 
-  componentWillMount() {
-    if (this.props.isAuthenticated === false) {
-      return;
-    } else {
-      axios.get("http://localhost:5000/api/list").then(res => {
-        this.setState({ medicines: res.data });
-      });
-    }
+  componentDidMount() {
+    axios.get("http://localhost:5000/api/list").then(res => {
+      this.setState({ medicines: res.data });
+    });
   }
   render() {
-    if (this.props.isAuthenticated === false) {
-      return <Redirect to="/login" />;
-    }
-
     if (this.state.reload) {
       window.location.reload();
     }

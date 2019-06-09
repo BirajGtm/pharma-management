@@ -1,16 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class MedNav extends React.Component {
   render() {
     return (
-      <div className="ui fluid three item menu">
-        <Link className="item" to="/medicines">
+      <div className="ui fluid two item menu">
+        <NavLink className="item" to="/medicines">
           List Medicine
-        </Link>
-        <Link className="item" to="/addmedicine">
+        </NavLink>
+        <NavLink className="item" to="/addmedicine">
           Add Medicine
-        </Link>
+        </NavLink>
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import auth from "./config/auth";
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeItem: "home", loggedIn: true };
+    this.state = { loggedIn: true };
 
     this.deleteUser = this.deleteUser.bind(this);
   }
@@ -22,46 +22,23 @@ class Nav extends React.Component {
 
     return (
       <div className="ui pointing menu">
-        <Link to="/">
-          <span
-            onClick={() => this.setState({ activeItem: "home" })}
-            className={
-              this.state.activeItem === "home" ? "active item" : "item"
-            }
-          >
-            Home
-          </span>
-        </Link>
-        <Link to="/medicines">
-          <span
-            onClick={() => this.setState({ activeItem: "medicines" })}
-            className={
-              this.state.activeItem === "medicines" ? "active item" : "item"
-            }
-          >
-            Medicines
-          </span>
-        </Link>
-        <Link to="/sales">
-          <span
-            onClick={() => this.setState({ activeItem: "sales" })}
-            className={
-              this.state.activeItem === "sales" ? "active item" : "item"
-            }
-          >
-            Sales
-          </span>
-        </Link>
+        <NavLink className="item" exact to="/">
+          Home
+        </NavLink>
+        <NavLink className="item" to="/medicines">
+          Medicines
+        </NavLink>
+        <NavLink className="item" to="/sales">
+          Sales
+        </NavLink>
         {this.props.isAuthenticated === true ? (
-          <a href="#" onClick={this.deleteUser}>
-            <span onClick={this.deleteUser} className="item">
-              Logout
-            </span>
+          <a className="item" href="#" onClick={this.deleteUser}>
+            Logout
           </a>
         ) : (
-          <Link to="/login">
-            <span className="active item">Login</span>
-          </Link>
+          <NavLink className="item" to="/login">
+            Login
+          </NavLink>
         )}
 
         <div className="right menu">
