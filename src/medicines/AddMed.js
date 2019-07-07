@@ -65,16 +65,22 @@ class AddMed extends React.Component {
       exd: new Date(this.state.expDate),
       total: Number(this.state.total)
     };
-    let data = await axios.post("http://localhost:5000/api/save", {
-      mode: "no-cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: `Bearer ${auth.checkCookie()}`
+    console.log(auth.checkCookie());
+    let data = await axios.post(
+      "http://localhost:5000/api/medicine/save",
+      {
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        ...meddata
       },
-      ...meddata
-    });
+      {
+        headers: { authorization: `Bearer ${auth.checkCookie()}` }
+      }
+    );
     if (data.data.success === true) {
       this.setState({
         success: true,

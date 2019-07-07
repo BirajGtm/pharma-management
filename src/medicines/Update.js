@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, Divider, Message, Form } from "semantic-ui-react";
 import axios from "axios";
+import auth from "../config/auth";
 
 class Update extends React.Component {
   constructor(props) {
@@ -27,15 +28,21 @@ class Update extends React.Component {
       total: Number(this.state.total),
       _id: this.props.item._id
     };
-    let data = await axios.post("http://localhost:5000/api/update", {
-      mode: "no-cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        Accept: "application/json",
-        "Content-Type": "application/json"
+    let data = await axios.post(
+      "http://localhost:5000/api/medicine/update",
+      {
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        ...item
       },
-      ...item
-    });
+      {
+        headers: { authorization: `Bearer ${auth.checkCookie()}` }
+      }
+    );
     if (data.data === "UPDATE SUCCESS") {
       this.setState({ updated: true });
     } else {

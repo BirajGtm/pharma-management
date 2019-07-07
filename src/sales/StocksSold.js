@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "semantic-ui-react";
 import SaleNav from "./SaleNav";
 import axios from "axios";
+import auth from "../config/auth";
 
 class StocksSold extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class StocksSold extends React.Component {
     if (this.props.isAuthenticated === false) {
       return;
     } else {
-      axios.get("http://localhost:5000/api/sales").then(res => {
-        this.setState({ medicines: res.data });
-        console.log(res.data);
-      });
+      axios
+        .get("http://localhost:5000/api/medicine/sales", {
+          headers: { authorization: `Bearer ${auth.checkCookie()}` }
+        })
+        .then(res => {
+          this.setState({ medicines: res.data });
+          console.log(res.data);
+        });
     }
   }
   render() {

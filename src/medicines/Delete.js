@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, Divider, Message } from "semantic-ui-react";
 import axios from "axios";
+import auth from "../config/auth";
 
 class Delete extends React.Component {
   constructor(props) {
@@ -15,15 +16,21 @@ class Delete extends React.Component {
 
   async handleDelete() {
     let item = this.props.item;
-    let data = await axios.post("http://localhost:5000/api/delete", {
-      mode: "no-cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        Accept: "application/json",
-        "Content-Type": "application/json"
+    let data = await axios.post(
+      "http://localhost:5000/api/medicine/delete",
+      {
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        ...item
       },
-      ...item
-    });
+      {
+        headers: { authorization: `Bearer ${auth.checkCookie()}` }
+      }
+    );
     if (data.data === "DELETED SUCCESSFULLY") {
       this.setState({ deleted: true });
     } else {

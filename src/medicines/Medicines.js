@@ -16,7 +16,7 @@ class About extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/list", {
+      .get("http://localhost:5000/api/medicine/list", {
         headers: { authorization: `Bearer ${auth.checkCookie()}` }
       })
       .then(res => {
