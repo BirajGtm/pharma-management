@@ -18,6 +18,7 @@ class RoutePage extends React.Component {
     };
   }
   render() {
+    console.log(auth.checkCookie(), "cookie");
     const PrivateRoute = ({ component: Component, ...rest }) => {
       return (
         // Show the component only when the user is logged in

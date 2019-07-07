@@ -4,6 +4,7 @@ import axios from "axios";
 import Delete from "./Delete";
 import Update from "./Update";
 import MedNav from "./MedNav";
+import auth from "../config/auth";
 
 class About extends React.Component {
   constructor(props) {
@@ -14,9 +15,15 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/api/list").then(res => {
-      this.setState({ medicines: res.data });
-    });
+    let token = auth.checkCookie();
+    axios
+      .get("http://localhost:5000/api/list", {
+        headers: { authorization: token }
+      })
+      .then(res => {
+        console.log(res, "result");
+        this.setState({ medicines: res.data });
+      });
   }
   render() {
     if (this.state.reload) {

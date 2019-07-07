@@ -37,9 +37,10 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password
     });
-
+    console.log(data, "response login");
     if (data.data !== "USERNAME OR PASSWORD IS INVALID") {
-      auth.setCookie(data.data);
+      auth.setCookie(data.data.token);
+      localStorage.setItem("user", JSON.stringify(data.data.result.email));
       this.setState({
         error: false,
         loggedIn: true

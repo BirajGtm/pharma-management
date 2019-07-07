@@ -1,7 +1,7 @@
 function checkCookie() {
-  var username = getCookie("username");
-  if (username !== "") {
-    return username;
+  var token = getCookie("token");
+  if (token !== "") {
+    return token;
   } else {
     return "NEED_TO_LOGIN";
   }
@@ -11,12 +11,12 @@ function setCookie(cvalue) {
   var d = new Date();
   d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
-  document.cookie = "username" + "=" + cvalue + ";" + expires + ";path=/";
+  document.cookie = "token" + "=" + cvalue + ";" + expires + ";path=/";
   return true;
 }
 
 function getCookie() {
-  var name = "username" + "=";
+  var name = "token" + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(";");
   for (var i = 0; i < ca.length; i++) {

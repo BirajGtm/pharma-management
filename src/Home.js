@@ -18,7 +18,7 @@ class Home extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              Hello {auth.getCookie()}
+              Hello {localStorage.getItem("user")}
             </Header>
             <Header as="h4">
               Use following links to access the pages directly:
