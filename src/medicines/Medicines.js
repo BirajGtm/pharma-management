@@ -15,10 +15,9 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    let token = auth.checkCookie();
     axios
       .get("http://localhost:5000/api/list", {
-        headers: { authorization: token }
+        headers: { authorization: `Bearer ${auth.checkCookie()}` }
       })
       .then(res => {
         console.log(res, "result");

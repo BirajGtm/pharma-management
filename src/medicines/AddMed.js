@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Form, Button, Header, Message } from "semantic-ui-react";
 import axios from "axios";
 import MedNav from "./MedNav";
+import auth from "../config/auth";
 
 class AddMed extends React.Component {
   constructor(props) {
@@ -69,7 +70,8 @@ class AddMed extends React.Component {
       headers: {
         "Access-Control-Allow-Origin": "*",
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: `Bearer ${auth.checkCookie()}`
       },
       ...meddata
     });
