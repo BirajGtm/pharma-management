@@ -31,6 +31,11 @@ class Nav extends React.Component {
         <NavLink className="item" to="/sales">
           Sales
         </NavLink>
+        {this.props.isAuthenticated === true && (
+          <NavLink className="item" to="/users">
+            Users
+          </NavLink>
+        )}
         {this.props.isAuthenticated === true ? (
           <a className="item" href="#" onClick={this.deleteUser}>
             Logout

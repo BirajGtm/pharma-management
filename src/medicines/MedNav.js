@@ -4,12 +4,15 @@ import { NavLink } from "react-router-dom";
 class MedNav extends React.Component {
   render() {
     return (
-      <div className="ui fluid two item menu">
+      <div className="ui fluid three item menu">
         <NavLink className="item" to="/medicines">
           List Medicine
         </NavLink>
         <NavLink className="item" to="/addmedicine">
           Add Medicine
+        </NavLink>
+        <NavLink className="item" to="/expired">
+          Expired
         </NavLink>
       </div>
     );

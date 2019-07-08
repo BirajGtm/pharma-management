@@ -9,6 +9,8 @@ import Nav from "./Nav";
 import auth from "./config/auth";
 import AddMed from "./medicines/AddMed";
 import StocksSold from "./sales/StocksSold";
+import ExpiredMed from "./medicines/ExpiredMed";
+import Users from "./users/Users";
 
 class RoutePage extends React.Component {
   constructor(props) {
@@ -44,6 +46,8 @@ class RoutePage extends React.Component {
           <PrivateRoute component={AddMed} path="/addmedicine/" />
           <PrivateRoute component={Sales} path="/sales" />
           <PrivateRoute component={StocksSold} path="/stockssold" />
+          <PrivateRoute component={ExpiredMed} path="/expired" />
+          <PrivateRoute component={Users} path="/users" />
           <Route
             component={() => <SignUp isAuthenticated={this.state.userData} />}
             path="/signup/"
